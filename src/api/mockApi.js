@@ -61,20 +61,16 @@ export const questionStream = async (params) => {
       throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
     }
 
-    const data = await response.json();
+    // --- The key change to handle plain text response ---
+    const data = await response.text();
     console.log("API response:", data);
     
-    // This is the key change: return the actual data from the API
     return data;
     
   } catch (error) {
     console.error("Failed to fetch from API:", error);
     // Return a structured error message for the frontend
-    return {
-      thread_id: requestBody.thread_id,
-      response_msg_id: "error-" + Date.now(),
-      response_text: "Sorry, I am unable to connect to the server right now. Please try again later.",
-    };
+    return "Sorry, I am unable to connect to the server right now. Please try again later.";
   }
 };
 

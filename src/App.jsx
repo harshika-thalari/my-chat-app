@@ -30,7 +30,7 @@ function App() {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setFollowupQuestions([]); 
 
-    const response = await questionStream({
+    const responseText = await questionStream({
       query: input,
       thread_id: activeChatId,
       new_chat: !activeChatId,
@@ -38,15 +38,22 @@ function App() {
       email_id: DUMMY_USER_EMAIL
     });
 
-    const aiMessage = { id: response.response_msg_id, sender: 'ai', text: response.response_text, isModified: false };
+    const aiMessage = { 
+      id: "ai-" + Date.now(),
+      sender: 'ai', 
+      text: responseText,
+      isModified: false 
+    };
     setMessages((prevMessages) => [...prevMessages, aiMessage]);
     
     if (!activeChatId) {
-      setActiveChatId(response.thread_id);
+      setActiveChatId("new-chat-" + Date.now());
     }
 
-    const followupResponse = await getFollowupQuestions({ response: response.response_text });
-    setFollowupQuestions(followupResponse.followup_questions);
+    // You will need to update this logic later once the API returns a JSON
+    // object with a valid response text.
+    // const followupResponse = await getFollowupQuestions({ response: responseText });
+    // setFollowupQuestions(followupResponse.followup_questions);
   };
 
   const handleModifiedMessage = (originalMessageId, modifiedMessage) => {
