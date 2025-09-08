@@ -135,27 +135,7 @@ export const rateMessage = async (params) => {
   };
 };
 
-/**
- * Mocks a POST request to get all chat threads for a user.
- * Endpoint: /api/getAllChats
- * @param {string} userId The ID of the user.
- * @returns {Promise<object>} A promise that resolves with a list of chat metadata.
- */
-export const getAllChats = async (userId) => {
-  console.log(`Mock API call: POST /api/getAllChats for user: ${userId}`);
-  
-  // Use async/await to pause execution for 300ms
-  await new Promise(resolve => setTimeout(resolve, 300));
-  
-  // Return the same data structure directly
-  return {
-    chats: [
-      { chatId: "chat-abc123", title: "Project Discussion", last_message: "See you soon!" },
-      { chatId: "chat-def456", title: "API Integration", last_message: "Looks good!" },
-      { chatId: "chat-ghi789", title: "New Feature Brainstorm", last_message: "Sounds great!" },
-    ]
-  };
-};
+
 
 /**
  * Mocks a POST request to generate follow-up questions.
