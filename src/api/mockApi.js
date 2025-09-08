@@ -143,8 +143,11 @@ export const rateMessage = async (params) => {
  */
 export const getAllChats = async (userId) => {
   console.log(`Mock API call: POST /api/getAllChats for user: ${userId}`);
+  
+  // Use async/await to pause execution for 300ms
   await new Promise(resolve => setTimeout(resolve, 300));
   
+  // Return the same data structure directly
   return {
     chats: [
       { chatId: "chat-abc123", title: "Project Discussion", last_message: "See you soon!" },
@@ -167,32 +170,6 @@ export const getFollowupQuestions = async (params) => {
   let questions = [];
 
   // Logic to generate different questions based on keywords in the response
-  if (params.response.toLowerCase().includes('architecture')) {
-    questions = [
-      "What is the overall system architecture?",
-      "Can you provide a diagram of the data flow?",
-      "How is the system scalable?"
-    ];
-  } else if (params.response.toLowerCase().includes('appsmith')) {
-    questions = [
-      "How do custom widgets work in Appsmith?",
-      "Can you show me the code for the widget?",
-      "What are the benefits of using Appsmith for this project?"
-    ];
-  } else if (params.response.toLowerCase().includes('api')) {
-    questions = [
-      "Can you list all available API endpoints?",
-      "How is authentication handled for the APIs?",
-      "What is the expected response for the `POST /api/getProfile` endpoint?"
-    ];
-  } else {
-    // Default questions if no keywords are found
-    questions = [
-      "Can you elaborate on that?",
-      "What are the next steps based on this information?",
-      "Are there any alternative approaches to consider?"
-    ];
-  }
   
   return {
     followup_questions: questions
